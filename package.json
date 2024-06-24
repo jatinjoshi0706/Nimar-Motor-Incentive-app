@@ -1,0 +1,40 @@
+{
+  "name": "maruti-app",
+  "productName": "maruti-app",
+  "version": "1.0.0",
+  "description": "My Electron application description",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "start:nodemon": "nodemon --watch main.js --exec npm start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.4.0",
+    "@electron-forge/maker-deb": "^7.4.0",
+    "@electron-forge/maker-rpm": "^7.4.0",
+    "@electron-forge/maker-squirrel": "^7.4.0",
+    "@electron-forge/maker-zip": "^7.4.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
+    "@electron-forge/plugin-fuses": "^7.4.0",
+    "@electron/fuses": "^1.8.0",
+    "electron": "30.0.1"
+  },
+  "keywords": [],
+  "author": {
+    "name": "D34thwing",
+    "email": "jatinjoshi20096@acropolis.in"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "electronmon": "^0.5.1",
+    "nodemon": "^3.1.4",
+    "read-excel-file": "^5.7.1",
+    "write-excel-file": "^1.4.30",
+    "xlsx": "^0.18.5"
+  }
+}

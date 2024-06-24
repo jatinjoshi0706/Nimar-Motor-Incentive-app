@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Incentive Calculator</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+  &nbsp;&nbsp;&nbsp;
+  <div class="container" style="text-align: center;">
+    <h1 style="text-align: center;color: #1F1A17;">Maruti</h1>
+    <h1 style="text-align: center;color: #1F1A17;"> Incentive Calculator </h1>
+    <h4 style="text-align: center;color: #1F1A17;">Choose Your file to upload.</h4>
+    <div class="file-input-container">
+      <h4 style="text-align: center;color: #1F1A17;">Sales Excel</h4>
+      <input class="balloon" type="file" name="file" id="file-input-salesExcel" />
+      <h4 style="text-align: center;color: #1F1A17;">CDI Score excel</h4>
+      <input class="balloon" type="file" name="file" id="file-input-CDIScore" />
+    </div>
+    <form id="myForm">
+      <h2 style="color: #1F1A17;">Qualifying Condition</h2>
+      <div id="qcInputs" style="display: flex; padding: 20px; flex-direction: column; margin-bottom: 20px;">
+        <div style=" display: flex;   justify-content: space-evenly;">
+          <label for="carSelection" style="color: #1F1A17;">Select Focus Model Cars:</label>
+          <div id="carSelection">
+            <label style="color: #1F1A17;"><input type="checkbox" name="carsFM" value="ALTO"> ALTO</label>
+            <label style="color: #1F1A17;"><input type="checkbox" name="carsFM" value="K-10"> K-10</label>
+            <label style="color: #1F1A17;"><input type="checkbox" name="carsFM" value="S-Presso"> S-Presso</label>
+            <label style="color: #1F1A17;"><input type="checkbox" name="carsFM" value="CELERIO"> CELERIO</label>
+            <label style="color: #1F1A17;"><input type="checkbox" name="carsFM" value="WagonR"> WagonR</label>
+            <label style="color: #1F1A17;"><input type="checkbox" name="carsFM" value="BREZZA"> BREZZA</label>
+            <label style="color: #1F1A17;"><input type="checkbox" name="carsFM" value="DZIRE"> DZIRE</label>
+            <label style="color: #1F1A17;"><input type="checkbox" name="carsFM" value="EECO"> EECO</label>
+            <label style="color: #1F1A17;"><input type="checkbox" name="carsFM" value="Ertiga"> Ertiga</label>
+            <label style="color: #1F1A17;"><input type="checkbox" name="carsFM" value="SWIFT"> SWIFT</label>
+          </div>
+        </div>
+        <div style=" display: flex;  justify-content: space-evenly;">
+          <label for="numCars" style="color: #1F1A17;">Number of Cars:</label>
+          <input type="number" id="numCars" name="numCars">
+        </div>
+        <div style=" display: flex;  justify-content: space-evenly;">
+          <label for="autocard" style="color: #1F1A17;">AutoCard:</label>
+          <select id="autocard" name="autocard">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+        <div style=" display: flex;  justify-content: space-evenly;">
+          <label for="ew" style="color: #1F1A17;">EW:</label>
+          <select id="ew" name="ew">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+      </div>
+      <h2 style="color: #1F1A17;">CDI scores</h2>
+      <label for="inputType" style="color: #1F1A17;">Select Input Type:</label>
+      <select id="inputType">
+        <option value="greater">Greater Than</option>
+        <option value="less">Less Than</option>
+      </select>
+      <button type="button" id="addInputButton">Add Input</button>
+      <div id="cdiInputs"></div>
+      <h2 style="color: #1F1A17;">Per Car Incentive</h2>
+      <div id="pairs-container" style="color: #1F1A17; margin-top: 20px;">
+        <div class="pair-container">
+          <label for="cars" style="color: #1F1A17;">Number of Cars:</label>
+          <input type="number" name="cars">
+          <label for="incentive" style="color: #1F1A17;">Incentive:</label>
+          <input type="number" name="incentive" step="0.01">
+        </div>
+        <button type="button" id="addPairButton">Add Pair</button>
+      </div>
+      <h2 style="color: #1F1A17;">MGA Incentive</h2>
+      <label for="rangeType">Range Type:</label>
+      <select id="rangeType" name="rangeType">
+        <option value="lessThan">Less than</option>
+        <option value="greaterThan">Greater than</option>
+        <option value="between">Between</option>
+      </select>
+      <br>
+      <div id="MGAinputsContainer">
+      </div>
+      <button type="button" id="addMGAInput">Add Input</button>
+      <br>
+      <button type="submit">Submit</button>
+    </form>
+    <table></table>
+  </div>
+  <script src="preload.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+</body>
+</html>
