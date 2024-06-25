@@ -53,6 +53,8 @@ function addRange(type, value1, value2, incentive) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+
+    // provide file path to sales excel
     const fileSelectorSalesExcel = document.querySelector("#file-input-salesExcel");
     fileSelectorSalesExcel.addEventListener("change", (e) => {
         const filePath = e.target.files[0].path;
@@ -61,14 +63,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
+    // provide file path to CDI Score excel
     const fileSelectorCDIScore = document.querySelector("#file-input-CDIScore");
     fileSelectorCDIScore.addEventListener("change", (e) => {
         const filePath = e.target.files[0].path;
         ipcRenderer.send("file-selected-CDIScore", filePath);
         console.log(filePath);
     });
-    const form = document.getElementById('myForm');
 
+    // provide file path to emp status excel
+    const fileSelectorEmpStatusSheet = document.querySelector("#file-input-employeeStatus");
+    fileSelectorEmpStatusSheet.addEventListener("change", (e) => {
+        const filePath = e.target.files[0].path;
+        ipcRenderer.send("file-selected-employeeStatus", filePath);
+        console.log(filePath);
+    });
+
+    const form = document.getElementById('myForm');
 
     // For CDI Range
     const inputTemplates = {
@@ -141,8 +152,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-
-
         const finalObj = {};
         const formData = new FormData(form);
         const qcData = {
@@ -151,15 +160,12 @@ document.addEventListener("DOMContentLoaded", function () {
             autoCard: formData.get('autocard'),
             EW: formData.get('ew')
         };
-
-
         const cdiIncentives = [...document.querySelectorAll('.cdiInput')].map(div => {
             // const type = div.querySelector('[name="cdiValue"]') ? (div.querySelector('[name="cdiValue"]').previousElementSibling.textContent.includes('Greater') ? 'greater' : 'less') : 'range';
             let type;
             const cdiMinElement = div.querySelector('[name="cdiMin"]');
             const cdiMaxElement = div.querySelector('[name="cdiMax"]');
             const cdiValueElement = div.querySelector('[name="cdiValue"]');
-
             if (cdiMinElement && cdiMaxElement) {
                 type = 'range';
             } else if (cdiValueElement) {
@@ -168,9 +174,6 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 type = null;
             }
-
-
-
             const cdiValue = parseFloat(div.querySelector('[name="cdiValue"]')?.value) || null;
             const cdiMin = parseFloat(div.querySelector('[name="cdiMin"]')?.value) || null;
             const cdiMax = parseFloat(div.querySelector('[name="cdiMax"]')?.value) || null;
@@ -224,8 +227,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     });
-
-
 
     ipcRenderer.on("data-error", (event, errorMessage) => {
         console.error(errorMessage);

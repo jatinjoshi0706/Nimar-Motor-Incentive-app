@@ -24,29 +24,23 @@ const function1 = require('./functions/func1');
 let function1Result;
 
 //global datasheets
-let salesExcelDataSheet = [];
-// salesExcelDataSheet : [
-//   {
-//     101: [{}, {}, {}]
-//   },
-//   {
-//     102: [{}, {}, {}]
-//   },
-//   {
-//     103: [{}, {}, {}]
-//   }
-// ]
-
+let salesExcelDataSheet = [];// salesExcelDataSheet : [
+                            //   {
+                            //     101: [{}, {}, {}]
+                            //   },
+                            //   {
+                            //     102: [{}, {}, {}]
+                            //   },
+                            //   {
+                            //     103: [{}, {}, {}]
+                            //   }
+                            // ]
 let CDIScoreDataSheet = [];
+let employeeStatusDataSheet = [];
 let qualifiedRM = [];
 let nonQualifiedRM = [];
 
-const incentiveAsPerCDIScore = (formData) => {
-  qualifiedRM.forEach((record)=>{
-    
-  })
-}
-  const perCarincentiveCalculation = (formData) => {
+const perCarincentiveCalculation = (formData) => {
   qualifiedRM.forEach((record) => {
     const soldCar = record["Grand Total"];
     let perCarIncentive = 0;
@@ -55,7 +49,7 @@ const incentiveAsPerCDIScore = (formData) => {
     formData.carIncentive.forEach((incentive) => {
       if (soldCar === parseInt(incentive.cars)) {
         perCarIncentive = parseInt(incentive.incentive);
-        console.log("perCarIncentive ::::::::::::::::::",perCarIncentive);
+        console.log("perCarIncentive ::::::::::::::::::", perCarIncentive);
       }
     });
 
@@ -66,10 +60,10 @@ const incentiveAsPerCDIScore = (formData) => {
 
   console.log("qualifiedRM with incentives: ", qualifiedRM);
 }
-
-const checkQualifingCondition = (formData) => {
+const checkQualifingCondition = (formData, employeStatusArr) => {
   console.log("checkQualifingCondition");
   salesExcelDataSheet.forEach((item) => {
+
     let numberCheck = 0;
     let EWCheck = 0;
     let autoCardCheck = 0;
@@ -87,109 +81,129 @@ const checkQualifingCondition = (formData) => {
       "SWIFT": 0
     }
 
-    const DSE_NoOfSoldCarExcelDataArr = Object.values(item)[0]; //changing Arr = "DSE_NoOfSoldCarExcelDataArr"
-    obj = {
-      "DSE ID": DSE_NoOfSoldCarExcelDataArr[0]['DSE ID'],
-      "DSE Name": DSE_NoOfSoldCarExcelDataArr[0]['DSE Name'],
-      "BM AND TL NAME": DSE_NoOfSoldCarExcelDataArr[0]['BM AND TL NAME'],
-      "Extended Warranty": DSE_NoOfSoldCarExcelDataArr[0]['Extended Warranty'],
-      "Focus Model Qualification": "No",
-      "Grand Total": 0
+    const DSE_NoOfSoldCarExcelDataArr = Object.values(item)[0];
 
-    }
-
-    DSE_NoOfSoldCarExcelDataArr.forEach((sold) => {
-
-      if (formData.QC.focusModel.includes(sold["Model Name"])) {
-        numberCheck++;
-        carObj[sold["Model Name"]]++;
+    let empStatus = true;
+    console.log(employeStatusArr)
+    employeStatusArr.forEach(employee => {
+      if (employee["DSE ID"] == DSE_NoOfSoldCarExcelDataArr[0]['DSE ID']) {
+        if (employee["STATUS"] === "NEW")
+          empStatus = false;
       }
-      if (formData.QC.autoCard == "yes") {
-        if (sold["Autocard"] == "YES") {
-          autoCardCheck++;
+    });
+
+    console.log("Data::");
+    console.log(DSE_NoOfSoldCarExcelDataArr[0]['DSE ID']);
+    console.log(empStatus);
+    // console.log(employeStatusKey);
+    if (empStatus) {
+      obj = {
+        "DSE ID": DSE_NoOfSoldCarExcelDataArr[0]['DSE ID'],
+        "DSE Name": DSE_NoOfSoldCarExcelDataArr[0]['DSE Name'],
+        "BM AND TL NAME": DSE_NoOfSoldCarExcelDataArr[0]['BM AND TL NAME'],
+        "Extended Warranty": DSE_NoOfSoldCarExcelDataArr[0]['Extended Warranty'],
+        "Focus Model Qualification": "No",
+        "Grand Total": 0
+      }
+
+      DSE_NoOfSoldCarExcelDataArr.forEach((sold) => {
+
+        if (formData.QC.focusModel.includes(sold["Model Name"])) {
+          numberCheck++;
+          carObj[sold["Model Name"]]++;
         }
-      }
-      if (formData.QC.EW == "yes") {
-        if (sold["Extended Warranty"] > 0) {
-          EWCheck++;
+        if (formData.QC.autoCard == "yes") {
+          if (sold["Autocard"] == "YES") {
+            autoCardCheck++;
+          }
         }
-      }
-    })
+        if (formData.QC.EW == "yes") {
+          if (sold["Extended Warranty"] > 0) {
+            EWCheck++;
+          }
+        }
+      })
 
-    //for EW and auto card check
-    if (numberCheck >= formData.QC.numOfCars) {
-      let EWFlag = true;
-      let autoCardFlag = true;
+      //for EW and auto card check
+      if (numberCheck >= formData.QC.numOfCars) {
+        let EWFlag = true;
+        let autoCardFlag = true;
 
-      //checking autocard from the excel [form ] 
-      if (formData.QC.autoCard === "yes" && (EWCheck >= DSE_NoOfSoldCarExcelDataArr.length))
-        autoCardFlag = true;
-      else {
-        if (formData.QC.autoCard === "yes")
-          autoCardFlag = false;
-      }
-      if (formData.QC.EW === "yes" && (EWCheck >= DSE_NoOfSoldCarExcelDataArr.length))
-        EWFlag = true;
-      else {
-        if (formData.QC.EW === "yes")
-          EWFlag = false;
-      }
-      if (EWFlag && autoCardFlag) {
-        console.log("sdfghgfcvhjkjhv  :  ", obj);
-        obj = {
-          ...obj,
-          ...carObj,
-          "Focus Model Qualification": "YES",
-          "Grand Total": numberCheck
+        //checking autocard from the excel [form ] 
+        if (formData.QC.autoCard === "yes" && (EWCheck >= DSE_NoOfSoldCarExcelDataArr.length))
+          autoCardFlag = true;
+        else {
+          if (formData.QC.autoCard === "yes")
+            autoCardFlag = false;
         }
-        qualifiedRM.push(obj)
-      } else {
-        obj = {
-          ...obj,
-          ...carObj,
-          "Focus Model Qualification": "No",
-          "Grand Total": numberCheck
+        if (formData.QC.EW === "yes" && (EWCheck >= DSE_NoOfSoldCarExcelDataArr.length))
+          EWFlag = true;
+        else {
+          if (formData.QC.EW === "yes")
+            EWFlag = false;
         }
-        nonQualifiedRM.push(obj)
+        if (EWFlag && autoCardFlag) {
+          obj = {
+            ...obj,
+            ...carObj,
+            "Focus Model Qualification": "YES",
+            "Grand Total": numberCheck
+          }
+          qualifiedRM.push(obj)
+        } else {
+          obj = {
+            ...obj,
+            ...carObj,
+            "Focus Model Qualification": "No",
+            "Grand Total": numberCheck
+          }
+          nonQualifiedRM.push(obj)
+        }
       }
     }
   })
   console.log("qualifiedRM : ", qualifiedRM)
   console.log("nonQualifiedRM : ", nonQualifiedRM)
-  // console.log("Qualifying DSE", qualifiedRM);
+  // console.log("Qualifying  DSE", qualifiedRM);
 
 }
 
 ipcMain.on('form-submit', (event, formData) => {
   console.log("Form Data Input", formData);
-  checkQualifingCondition(formData);
+  const employeStatus = employeeStatusDataSheet;
+  checkQualifingCondition(formData, employeStatus);
   perCarincentiveCalculation(formData);
   incentiveAsPerCDIScore(formData)
-  
+
 });
 
 ipcMain.on('file-selected-salesExcel', (event, path) => {
   const workbook = XLSX.readFile(path);
-  const sheetName = workbook.SheetNames[0];
-  const sheet = workbook.Sheets[sheetName];
-  const sheetData = XLSX.utils.sheet_to_json(sheet);
-  sheetData.shift();
-  let groupedData = {};
-  sheetData.forEach(row => {
+  const salesExcelSheetName = workbook.SheetNames[0];
+  const salesExcelSheet = workbook.Sheets[salesExcelSheetName];
+  const salesExcelSheetData = XLSX.utils.sheet_to_json(salesExcelSheet);
+  salesExcelSheetData.shift();
+  let salesExcelGroupedData = {};
+  salesExcelSheetData.forEach(row => {
     const dseId = row['DSE ID'];
-    if (!groupedData[dseId]) {
-      groupedData[dseId] = [];
+    if (!salesExcelGroupedData[dseId]) {
+      salesExcelGroupedData[dseId] = [];
     }
-    groupedData[dseId].push(row);
+    salesExcelGroupedData[dseId].push(row);
   });
-  for (const key in groupedData) {
-    if (groupedData.hasOwnProperty(key)) {
+  for (const key in salesExcelGroupedData) {
+    if (salesExcelGroupedData.hasOwnProperty(key)) {
       const obj = {};
-      obj[key] = groupedData[key];
+      obj[key] = salesExcelGroupedData[key];
       salesExcelDataSheet.push(obj);
     }
   }
   console.log("Object inside array Sales excel", JSON.stringify(salesExcelDataSheet));
+
+  const employeeStatusSheetName = workbook.SheetNames[3];
+  const employeeStatusSheet = workbook.Sheets[employeeStatusSheetName];
+  employeeStatusDataSheet = XLSX.utils.sheet_to_json(employeeStatusSheet);
+  console.log("Object inside array employeeStatus", JSON.stringify(employeeStatusDataSheet));
 });
 
 
@@ -216,10 +230,7 @@ ipcMain.on('file-selected-CDIScore', (event, path) => {
   console.log("Object inside array CDI Score", JSON.stringify(CDIScoreDataSheet));
 });
 
-// ipcMain.handle('do-function1', async (event, param1, param2) => {
-//   function1Result = await function1(param1, param2);
-//   return function1Result;
-// });
+
 
 app.whenReady().then(() => {
   createWindow();
