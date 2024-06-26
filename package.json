@@ -21,7 +21,10 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
     "@electron-forge/plugin-fuses": "^7.4.0",
     "@electron/fuses": "^1.8.0",
-    "electron": "30.0.1"
+    "autoprefixer": "^10.4.19",
+    "electron": "30.0.1",
+    "postcss-loader": "^8.1.1",
+    "tailwindcss": "^3.4.4"
   },
   "keywords": [],
   "author": {

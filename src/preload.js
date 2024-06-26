@@ -4,10 +4,7 @@ const XLSX = require("xlsx");
 let MGAranges = [];
 let carPairs = [];
 
-contextBridge.exposeInMainWorld('api', {
-    doFunction1: () => ipcRenderer.invoke('do-function1'),
-    doFunction2: () => ipcRenderer.invoke('do-function2')
-});
+
 
 function MGAcreateInputField(type) {
     const div = document.createElement('div');
@@ -41,7 +38,7 @@ function MGAcreateInputField(type) {
     return div;
 }
 
-
+//add range for MGA
 function addRange(type, value1, value2, incentive) {
     if (type === 'lessThan') {
         MGAranges.push({ type: 'lessThan', value: value1, incentive: incentive });

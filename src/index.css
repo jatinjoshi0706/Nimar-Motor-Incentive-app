@@ -11,7 +11,7 @@ body {
   font-weight: 300;
   line-height: 1;
   color: #fff;
-  background: #ccd9e8;
+  background: #cf7c304d;
 }
 @mixin epic-sides() {
     position: relative;
@@ -59,4 +59,444 @@ th, td {
   overflow-wrap: break-word; /* Break words to prevent overflow */
   max-width: 200px; /* Set max width to prevent cell from growing indefinitely */
 }
+
+.container{
+  text-align: center;
+    width: 60%;
+    margin: auto;
+}
+
+.form-container{
+  background-color: #fefdfb;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  filter: drop-shadow(0 0 0.75rem #afa38b);
+}
+/* 
+#qcInputs{
+  display: flex !important;
+  flex-direction: row !important;
+}
+.carSelection-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 20px;
+  padding: 30px 15px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  flex-direction: column;
+}
+
+.carSelection-container label {
+  font-size: 16px;
+  color: #1F1A17;
+  margin-right: 15px;
+}
+
+#carSelection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  
+}
+
+#carSelection label {
+  font-size: 14px;
+  color: #1F1A17;
+  display: flex;
+  align-items: center;
+}
+
+#carSelection input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.qcSection2-container{
+  display: flex;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+    /* align-content: stretch; */
+    /* justify-content: space-between;
+    align-items: flex-start; */
+
+/* }  */
+
+.qcInput-container {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin: 20px;
+}
+
+.qcInput-container h2 {
+  color: #1F1A17;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#qcInputs {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.carSelection-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+}
+
+.carSelection-container label {
+  font-size: 16px;
+  color: #1F1A17;
+  margin-right: 15px;
+}
+
+#carSelection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#carSelection label {
+  font-size: 14px;
+  color: #1F1A17;
+  display: flex;
+  align-items: center;
+}
+
+#carSelection input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.qcSection2-container {
+  display: flex;
+  flex-direction: column;
+  /* gap: 20px; */
+}
+
+.numberofCars-container, .autoCard-container, .ew-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+}
+
+.numberofCars-container label, .autoCard-container label, .ew-container label {
+  font-size: 16px;
+  color: #1F1A17;
+  margin-right: 15px;
+}
+
+.numberofCars-container input, .autoCard-container select, .ew-container select {
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.cdiInput-container {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin: 20px;
+}
+
+.cdiInput-container h2 {
+  color: #1F1A17;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.inputType-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+}
+
+.inputType-container label {
+  font-size: 16px;
+  color: #1F1A17;
+  margin-right: 15px;
+}
+
+.inputType-container select, .inputType-container button {
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#cdiInputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.cdiInput {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+}
+
+.cdiInput label {
+  font-size: 16px;
+  color: #1F1A17;
+  margin-right: 15px;
+}
+
+.cdiInput input {
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#addInputButton:hover {
+  background-color: #333;
+}
+
+#addInputButton{
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: #1F1A17;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: center;
+}
+
+.perCarIncentive-container {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin: 20px;
+}
+
+.perCarIncentive-container h2 {
+  color: #1F1A17;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#pairs-container {
+  color: #1F1A17;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pair-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+}
+
+.pair-container label {
+  font-size: 16px;
+  color: #1F1A17;
+  margin-right: 15px;
+}
+
+.pair-container input {
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#addPairButton {
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: #1F1A17;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: center;
+}
+
+#addPairButton:hover {
+  background-color: #333;
+}
+
+
+
+/*MGA design start */
+.mgaIncentive-container {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin: 20px;
+}
+
+.mgaIncentive-container h2 {
+  color: #1F1A17;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.rangeType-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+}
+
+.rangeType-container label {
+  font-size: 16px;
+  color: #1F1A17;
+  margin-right: 15px;
+}
+
+.rangeType-container select {
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#MGAinputsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.range-input {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 20px;
+  color: #1F1A17;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+}
+
+.mgaInput label {
+  font-size: 16px;
+  color: #1F1A17;
+  margin-right: 15px;
+}
+
+.mgaInput input {
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#addMGAInput  {
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: #1F1A17;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: center;
+  margin-top: 20px;
+}
+
+#addMGAInput button:hover {
+  background-color: #333;
+}
+
+/* input excel sheet section */
+.file-input-container {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin: 20px;
+    text-align: center;
+}
+
+.file-input-container h4 {
+    color: #1F1A17;
+    margin: 20px 0;
+}
+
+.file-input-container input[type="file"] {
+    display: block;
+    margin: 0 auto 20px;
+    padding: 10px;
+    font-size: 14px;
+    color: #1F1A17;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.file-input-container input[type="file"]::file-selector-button {
+    background-color: #1F1A17;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.file-input-container input[type="file"]::file-selector-button:hover {
+    background-color: #333;
+}
+
+
+/* submit btn  */
+button[type="button"], button[type="submit"] {
+  background-color: #1F1A17;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button[type="button"]:hover, button[type="submit"]:hover {
+  background-color: #333;
+}
+
 

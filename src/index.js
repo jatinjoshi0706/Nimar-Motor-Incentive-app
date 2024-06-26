@@ -173,9 +173,10 @@ ipcMain.on('form-submit', (event, formData) => {
   const employeStatus = employeeStatusDataSheet;
   checkQualifingCondition(formData, employeStatus);
   perCarincentiveCalculation(formData);
-  incentiveAsPerCDIScore(formData)
+  
 
 });
+
 
 ipcMain.on('file-selected-salesExcel', (event, path) => {
   const workbook = XLSX.readFile(path);
